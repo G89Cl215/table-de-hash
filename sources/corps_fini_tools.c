@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:56:53 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/28 16:14:16 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/28 17:43:11 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ uint64_t		ft_get_prime(uint64_t min)
 	res = 0;
 	while (!(ft_miller_rabin(res, GOOD_ENOUGH)))
 		res = min + ft_random_get();
-	printf(">>>> %llu <<<<\n", res);
+//	printf(">>>> %llu <<<<\n", res);
 	return (res);
 }
 
