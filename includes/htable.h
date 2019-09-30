@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/28 13:38:24 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/30 16:54:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 
+# define LIST_SIZE			16
 # define ALPH_PRIME			269
 # define GOOD_ENOUGH		6
 
@@ -44,5 +45,6 @@ typedef struct		s_htable
 uint64_t			ft_hash(const t_htable *htable, const char *to_hash);
 uint64_t			ft_get_prime(uint64_t min);
 uint64_t			ft_get_ran(uint64_t mod);
+int					ft_miller_rabin(uint64_t to_test, uint64_t k);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:56:53 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/28 17:43:11 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/30 17:51:53 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,11 @@
 #include "htable.h"
 #include <stdio.h>
 
-int				ft_miller_rabin(uint64_t to_test, uint64_t k);
-/*static uint64_t	ft_rd_random()
-{
-	int				fd;
-	union u_rd		res;
-
-	fd = open("/dev/random", O_RDONLY);
-	read(fd, res.rd, sizeof(uint64_t));
-	close(fd);
-	return (res.nbr);
-}*/
-
-#define LIST_SIZE 16
-
 unsigned int		ft_random_get(void)
 {
-	static unsigned int	nums[LIST_SIZE];
-	static unsigned int	curr = 0;
-	int					fd;
+	static unsigned int		nums[LIST_SIZE];
+	static unsigned int		curr = 0;
+	int						fd;
 
 	if (curr % LIST_SIZE == 0)
 	{
@@ -49,16 +35,6 @@ unsigned int		ft_random_range(unsigned int min, unsigned int max)
 {
 	return (min + (ft_random_get() % max));
 }
-/*
-int					main(void)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 120)
-		printf("%d\n", ft_random_range(0, 100));
-}*/
-
 
 uint64_t		ft_get_prime(uint64_t min)
 {
@@ -67,7 +43,6 @@ uint64_t		ft_get_prime(uint64_t min)
 	res = 0;
 	while (!(ft_miller_rabin(res, GOOD_ENOUGH)))
 		res = min + ft_random_get();
-//	printf(">>>> %llu <<<<\n", res);
 	return (res);
 }
 
@@ -99,10 +74,7 @@ uint64_t		ft_rapid_expo_mod(uint64_t nbr, uint64_t exp, uint64_t mod)
 	return (ft_sq_mod(ft_rapid_expo_mod(nbr, exp >> 1, mod), mod));
 }
 
-
-/* Test de primalite avec une incertitude de l'ordre de 4 ^ (-k) */
-
-int				ft_sqrt(uint64_t nbr)
+/*int				ft_sqrt(uint64_t nbr)
 {
 	uint64_t	res;
 
@@ -128,8 +100,9 @@ uint64_t		ft_eratosthene(uint64_t nbr)
 		i += 2;
 	}
 	return (1);
-}
+}*/
 
+/* Test de primalite avec une incertitude de l'ordre de 4 ^ (-k) */
 
 int				ft_miller_rabin(uint64_t to_test, uint64_t k)
 {
