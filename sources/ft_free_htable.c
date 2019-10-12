@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 16:48:25 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/12 23:12:05 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 01:15:51 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void			ft_free_s_entry(void *to_free, size_t null)
 void			ft_free_htable(t_htable *htable)
 {
 	uint64_t	i;
-	t_list		**table;
+	t_hlist		**table;
 
 	i = 0;
 	table = htable->table;
 	while (i < htable->table_size)
 	{
 		if (table[i])
-			ft_lstdel(&(table[i]), &ft_free_s_entry);
+			ft_lstdel((t_list**)(&(table[i])), &ft_free_s_entry);
 		i++;
 	}
 	free(htable->table);
