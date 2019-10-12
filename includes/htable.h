@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/30 16:54:35 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/12 22:00:28 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ union				u_rd
 	uint64_t		nbr;
 };
 
-
 typedef struct		s_entry
 {
 	char			*key;
@@ -41,6 +40,8 @@ typedef struct		s_htable
 	uint64_t		ran_a;
 	uint64_t		ran_b;
 }					t_htable;
+
+typedef void		(*t_ft_list)(const t_list *);
 
 uint64_t			ft_hash(const t_htable *htable, const char *to_hash);
 uint64_t			ft_get_prime(uint64_t min);
