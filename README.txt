@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/12 20:19:31 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/12 20:25:54 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ other students of the 42 school.
 It allows any subprogram to create, fill, map destroy a hash table.
 
 TO WHOM MIGHT WONDER: Hash tables are data structures that allow users to look
-up for any given data in constant time. They rely on cryptographic hash
-functions to give data a certain index. If the table(/array) is wide enough and
-certain parameters chosen in a smart manner (see load factor, size is a prime
-etc..), complex maths tells us there is a high probability the entry will be
-the only one coupled with the index it was filed at. This module takes no chance
-though, and avoids collision by chaining data with the same  The inconvenient of hash tables is the gigantic memory hog.
+	up for any given data in constant time. They rely on cryptographic hash
+	functions to give data a certain index. If the table(/array) is wide enough
+	and certain parameters chosen in a smart manner (see load factor, size is a
+	prime etc..), complex maths tells us there is a high probability the entry
+	will be the only one coupled with the index it was filed at. This module
+	takes no chance though, and avoids collision by chaining data with the same.
+	The main inconvenient of hash tables is the gigantic memory hog.
 
 It is fully independant and can be called in the shell by invocking functions of
 hash_module.h header.
@@ -35,6 +36,7 @@ hash_module.h header.
 USER BE WARNED, this module DOES NOT keep track of the memory it
 allocated ; Any table init'd by ft_init_htable must be free'd with
 ft_free_htable lest you want memory leaks!
+
 
 II.FURTHER EXPLANATION
 
@@ -64,9 +66,11 @@ o> ft_hash_path : On the first call, it will find every executable binary in a
 
 o> ft_free_htable : pretty straight foward.
 
+
 III.ERRORS
 
 The only Error is due to shortage of memory when allocating.
+
 
 IV.NOTA BENE
 
