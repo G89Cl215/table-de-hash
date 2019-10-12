@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/12 20:25:54 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/12 21:30:36 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ o> ft_free_htable : pretty straight foward.
 III.ERRORS
 
 The only Error is due to shortage of memory when allocating.
+Functions are not protected against any segfault poor designing might cause.
 
 
 IV.NOTA BENE
