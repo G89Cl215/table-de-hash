@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_entries.c                                   :+:      :+:    :+:   */
+/*   ft_lst_entries.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 22:02:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/12 22:10:01 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/12 23:20:48 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ t_list		*ft_lstret(t_list *elem)
 	return (elem);
 }
 
-
-t_list		*ft_get_entries(t_htable *htable)
+t_list		*ft_lst_entries(const t_htable *htable)
 {
 	size_t		i;
 	t_list		**table;
@@ -30,7 +29,7 @@ t_list		*ft_get_entries(t_htable *htable)
 	while (i < htable->table_size)
 	{
 		if (table[i])
-			ft_lstadd(&entries, ft_lstmap(&(table[i]), &ft_lstret));
+			ft_lstadd(&entries, ft_lstmap(table[i], &ft_lstret));
 		i++;
 	}
 	return (entries);

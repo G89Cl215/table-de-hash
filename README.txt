@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/12 21:53:16 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/12 23:24:59 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,8 @@ o> ft_hash_path : On the first call, it will find every executable binary in a
 	new path is compared with the one in memory. On a difference, it will empty
 	the hash table and re-insert the newly found binaries in the hash table.
 
-o> ft_print_htable : pretty straight foward. Although the outcome wont be
-	sorted...
+o> ft_print_sortentries : Will print each entry on a line the format key=value
+	and sorted in ascii values of keys.
 
 o> ft_free_htable : pretty straight foward.
 

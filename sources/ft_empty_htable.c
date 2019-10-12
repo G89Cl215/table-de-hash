@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 21:53:29 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/12 22:10:05 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/12 23:10:38 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		ft_empty_htable(t_htable *htable)
 	{
 		if (table[i])
 		{
-			ft_lstdel(&(table[i]));
+			ft_lstdel(&(table[i]), &ft_free_s_entry);
 			table[i] = NULL;
 		}
 		i++;
