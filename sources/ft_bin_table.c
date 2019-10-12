@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 16:36:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/30 17:54:46 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/12 20:19:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ void				ft_hash_path(t_htable *bin_table, char *path)
 
 	if (!(ft_strcmp(path, hashed)))
 		return ;
-	i = 0;
+	i = 0;i
+	//ft_map(empty);
 	/*ft_check_memory(*/dir = ft_strsplit(path, ':');
 	while ((dir[i]))
 		ft_push_exec(bin_table, dir[i++]);
 	ft_tabfree(dir);
 	ft_strdel(&hashed);
-	/*ft_check_memory(*/hashed = ft_strdup(path);
+	/*ft_check_memory(*/hashed = ft_strdup(path); //comment free ?
 }
