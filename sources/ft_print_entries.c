@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 22:23:01 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 01:26:22 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 04:04:24 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			ft_cmp_entry(t_list *to_cmp1, t_list *to_cmp2)
 	
 	entry1 = (t_hlist*)to_cmp1;
 	entry2 = (t_hlist*)to_cmp2;
-	return (ft_strcmp(entry1->content->key, entry2->content->key));
+	return (ft_strcmp(entry2->content->key, entry1->content->key));
 }
 
 static void		ft_print_entry(t_list *to_print)

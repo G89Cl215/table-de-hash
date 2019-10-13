@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 21:53:29 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 01:15:20 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 04:04:21 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void		ft_empty_htable(t_htable *htable)
 	{
 		if (table[i])
 		{
-			ft_lstdel((t_list**)(&(table[i])), &ft_free_s_entry);
+			ft_lstdel((t_list**)&(table[i]), &ft_free_s_entry);
 			table[i] = NULL;
 		}
 		i++;
 	}
+	htable->entry_nbr = 0;
 }

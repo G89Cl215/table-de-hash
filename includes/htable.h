@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 01:16:31 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 02:27:59 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ uint64_t			ft_get_prime(uint64_t min);
 uint64_t			ft_get_ran(uint64_t mod);
 int					ft_miller_rabin(uint64_t to_test, uint64_t k);
 void				ft_free_s_entry(void *to_free, size_t null);
+void				ft_del_entry(t_hlist **alst, void (*del)(void *, size_t));
 t_hlist				*ft_lst_entries(const t_htable *htable);
 
 #endif

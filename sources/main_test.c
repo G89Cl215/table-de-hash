@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/28 17:42:49 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 04:04:25 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ int		main(int ac, char **av, char **env)
 
 	i = 0;
 	table = ft_init_htable(DEF_SIZE);
-//	printf("{%llu}   a:b   {%llu}\n", table.ran_a, table.ran_b);
+	printf("{%llu}   a:b   {%llu}\n", table.ran_a, table.ran_b);
 	while ((av[i] && env[i]))
 	{
 		ft_insert(&table, av[i], env[i]);
-//		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
+		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
 		
 		i++;
 	}
+//	ft_print_sortentries(&table);
 	ft_free_htable(&table);
+
+	while (1)
+		;
+
 	return (0);
 }
 
