@@ -6,12 +6,32 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 04:04:25 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/13 04:39:15 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "hash_module.h"
+int64_t ft_used_cell(t_htable *htable)
+{
+	size_t		i;
+	int64_t		ret;
+	t_hlist		**table;
+
+	i = 0;
+	ret = 0;
+	table = htable->table;
+	while (i< htable->table_size)
+	{
+		if (table[i])
+			ret++;
+		i++;
+	}
+	return (ret);
+}
+
+
+
 
 int		main(int ac, char **av, char **env)
 {
@@ -19,8 +39,9 @@ int		main(int ac, char **av, char **env)
 	t_htable	table;
 
 	i = 0;
-	table = ft_init_htable(DEF_SIZE);
-	printf("{%llu}   a:b   {%llu}\n", table.ran_a, table.ran_b);
+	table = ft_init_htable(2);
+	printf("{%llu}		   a:b               {%llu}\n", table.ran_a, table.ran_b);
+	printf("{%llu}		size:\n", table.table_size);
 	while ((av[i] && env[i]))
 	{
 		ft_insert(&table, av[i], env[i]);
@@ -28,7 +49,8 @@ int		main(int ac, char **av, char **env)
 		
 		i++;
 	}
-//	ft_print_sortentries(&table);
+	printf("{%llu}		size:spread_factor   {%llu}\n", table.table_size, table.entry_nbr * 100/ ft_used_cell(&table));
+	ft_print_sortentries(&table);
 	ft_free_htable(&table);
 
 	while (1)
