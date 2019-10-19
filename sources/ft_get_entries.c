@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 22:02:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 04:03:10 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/19 11:20:46 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 t_list		*ft_lstcpy(t_list *elem)
 {
 	t_hlist		*new;
+	void		*tmp;
 
 	new = (t_hlist*)elem;
 	new->content->key = ft_strdup(new->content->key);
-	new->content->value = ft_strdup(new->content->value);
+	tmp = ft_memalloc(new->content->value_size);
+	ft_memcpy(tmp, new->content->value, new->content->value_size);
+	new->content->value = tmp;
 	return (elem);
 }
 

@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/12 23:24:59 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/19 15:37:06 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ I.Purpose
 
 This module is meant to be part of the larger 42sh project I worked on with 4
 other students of the 42 school.
-It allows any subprogram to create, fill, map destroy a hash table.
+It allows any subprogram to create, fill, map and destroy a hash table.
 
 TO WHOM MIGHT WONDER: Hash tables are data structures that allow users to look
 	up for any given data in constant time. They rely on cryptographic hash
@@ -49,10 +49,15 @@ o> ft_init_htable : entry_nbr is a rough estimate of number of entries you think
 	to avoid many system calls when looking for known executables may use
 	AVG_BIN_NBR as entry_nbr.
 
-o> ft_insert : needs a htable, a key to hash and the value of the entry. key is
-	fed to the cryptogrphic function to determine the index of the entry. value
-	is the data of the entry. A use could be, for example key = "grep", value =
-	"/usr/bin/grep".
+o> ft_insert : needs a htable, a key to hash and the value of the entry. The key
+	is always treated as a string, whereas value is (void*) type so that users
+	may insert whatever struct one wishes. The size of subsequent struct is
+	the last parameter of the function.
+	The simplest data one could insert is a string. The size_value should then
+	be the number of char of the string i.e. its length + 1 (for the final '\0')
+	The key is fed to the cryptographic function to determine the index of the
+	entry. value is the data of the entry. A use could be, for example
+	key = "grep", value = "/usr/bin/grep".
 
 o> ft_get_entry : if key corresponds with an entry of your table, the value of
 	this entry (see ft_insert) is returned.

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 12:52:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 05:02:21 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:59:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,24 @@ static void			ft_resize_htable(t_htable *htable)
 	voyager = entries;
 	while (voyager)
 	{
-		ft_insert(htable, voyager->content->key, voyager->content->value);
+		ft_insert(htable, voyager->content->key, voyager->content->value,
+												voyager->content->value_size);
 		voyager = voyager->next;
 	}
 	ft_lstdel((t_list**)&entries, &ft_free_s_entry);
 }
 
-void				ft_insert(t_htable *htable, char *key, char *value)
+void				ft_insert(t_htable *htable, char *key, void *value,
+															size_t value_size)
 {
 	size_t		index;
 	t_entry		content;
 	t_hlist		*new_entry;
 
-	content.key = ft_strdup(key);
-	content.value = ft_strdup(value);
+	/*ft_check_memory(*/content.key = ft_strdup(key);
+	/*ft_check_memory(*/content.value = ft_memalloc(value_size);
+	ft_memcpy(content.value, value, value_size);
+	content.value_size = value_size;
 	/*ft_check_memory(*/new_entry = (t_hlist*)ft_lstnew(&content, sizeof(content));
 	index = ft_hash(htable, key);
 	ft_lstadd((t_list**)&(htable->table[index]), (t_list*)new_entry);

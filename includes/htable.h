@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 02:27:59 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:56:47 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ union				u_rd
 typedef struct		s_entry
 {
 	char			*key;
-	char			*value;
+	void			*value;
+	size_t			value_size;
 }					t_entry;
 
 typedef struct		s_hlist
