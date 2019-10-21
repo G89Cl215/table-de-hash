@@ -6,12 +6,13 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/13 04:39:15 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:28:55 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "hash_module.h"
+
 int64_t ft_used_cell(t_htable *htable)
 {
 	size_t		i;
@@ -30,52 +31,39 @@ int64_t ft_used_cell(t_htable *htable)
 	return (ret);
 }
 
-
-
-
 int		main(int ac, char **av, char **env)
 {
 	int			i;
 	t_htable	table;
+	char		*path;
 
 	i = 0;
-	table = ft_init_htable(2);
-	printf("{%llu}		   a:b               {%llu}\n", table.ran_a, table.ran_b);
-	printf("{%llu}		size:\n", table.table_size);
-	while ((av[i] && env[i]))
+	table = ft_init_htable(2); //on commence avec une petite table pour voir le comportement du redimensionnement de la table... Leaks notamment
+//	printf("{%llu}		   a:b               {%llu}\n", table.ran_a, table.ran_b);
+//	printf("{%llu}		size:\n", table.table_size);
+/*	while ((av[i] && env[i]))
 	{
-		ft_insert(&table, av[i], env[i]);
+		ft_insert(&table, av[i], env[i], ft_strlen(env[i]) + 1);
 		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
 		
 		i++;
+	}*/
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], "PATH=", 5))
+		{
+			path = strdup(env[i] + 5);
+			break ;
+		}
+		i++;
 	}
-	printf("{%llu}		size:spread_factor   {%llu}\n", table.table_size, table.entry_nbr * 100/ ft_used_cell(&table));
+//	printf("{%s}\n", path);
+	ft_hash_path(&table, path);
+//	printf("{%llu}		size:spread_factor   {%llu}\n", table.table_size, (ft_used_cell(&table) * 100)/ table.entry_nbr );
 	ft_print_sortentries(&table);
 	ft_free_htable(&table);
 
-	while (1)
-		;
+	ft_hash_path(NULL, NULL);
 
 	return (0);
 }
-
-//uint64_t		ft_eratosthene(uint64_t nbr);
-//int				ft_miller_rabin(uint64_t to_test, uint64_t k);
-//int		main(int ac, char **argv)
-//{
-//	uint64_t num;
-//	uint64_t i;
-//	uint64_t prime;
-//
-//	i = 10000;
-//	num = 3102520049;
-//	while (i--)
-//	{
-//		//prime = ft_eratosthene(num);
-//		prime = ft_miller_rabin(num, 4);
-//		if (prime)
-//			printf("%llu is prime\n", num);
-//		else
-//			printf("%llu\n", num);
-//	}
-//}

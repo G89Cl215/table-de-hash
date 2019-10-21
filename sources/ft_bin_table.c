@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 16:36:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/12 23:07:10 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:15:46 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #include <sys/types.h>
 #include "hash_module.h"
 #include "libft.h"
+#include <stdio.h>
+
+/*
+** Cette surcouche du module vise a reproduire le fonctionnnement de la table de
+** hash du shell zsh.
+*/
 
 char				*ft_build_path(char *path, char *exec)
 {
@@ -31,7 +37,6 @@ char				*ft_build_path(char *path, char *exec)
 	res[slash] = '/';
 	ft_memcpy(res + slash + 1, exec, len);
 	res[slash + len + 1] = '\0';
-	free(path);
 	return (res);
 }
 
@@ -44,12 +49,18 @@ static void				ft_push_exec(t_htable *bin_table, char *dir_name)
 
 	if (!(dir_data = opendir(dir_name))) //probleme d'ouverture -> gestion d'erreur
 		return ;
-	while ((file_data = readdir(dir_data)))
+	while ((file_data = readdir(dir_data))) 
 	{
-		exec_path = ft_build_path(dir_name, file_data->d_name);
-		if (stat(exec_path, &sb) >= 0 && sb.st_mode & S_IXUSR)
-			ft_insert(bin_table, file_data->d_name, exec_path);
-		free(exec_path);
+		if (ft_strcmp(file_data->d_name, ".") 
+		&& ft_strcmp(file_data->d_name, "..")
+		&& !ft_get_entry(bin_table, file_data->d_name))
+		{
+			exec_path = ft_build_path(dir_name, file_data->d_name);
+			if (stat(exec_path, &sb) >= 0 && sb.st_mode & S_IXUSR)
+				ft_insert(bin_table, file_data->d_name, exec_path,
+													ft_strlen(exec_path) + 1);
+			free(exec_path);
+		}
 	}
 	closedir(dir_data);
 }
@@ -60,14 +71,23 @@ void				ft_hash_path(t_htable *bin_table, char *path)
 	char			**dir;
 	size_t			i;
 
-	if (!(ft_strcmp(path, hashed)))
+	if (!path || !bin_table)
+	{
+		ft_strdel(&hashed);
+		return ;
+	}
+	if (hashed && !(ft_strcmp(path, hashed)))
 		return ;
 	i = 0;
 	//ft_map(empty);
 	/*ft_check_memory(*/dir = ft_strsplit(path, ":");
 	while ((dir[i]))
+	{
+		printf("{%s}\n", dir[i]);
 		ft_push_exec(bin_table, dir[i++]);
+	}
 	ft_tabfree(dir);
-	ft_strdel(&hashed);
+	if (hashed)
+		ft_strdel(&hashed);
 	/*ft_check_memory(*/hashed = ft_strdup(path); //comment free ?
 }
