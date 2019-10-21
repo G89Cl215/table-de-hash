@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/19 12:56:47 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/21 23:20:45 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct		s_entry
 {
 	char			*key;
 	void			*value;
-	size_t			value_size;
 }					t_entry;
 
 typedef struct		s_hlist
@@ -50,12 +49,12 @@ typedef struct		s_htable
 }					t_htable;
 
 typedef void		(*t_ft_list)(t_list *);
+typedef void		(*t_ft_free)(void *, size_t);
 
 uint64_t			ft_hash(const t_htable *htable, const char *to_hash);
 uint64_t			ft_get_prime(uint64_t min);
 uint64_t			ft_get_ran(uint64_t mod);
 int					ft_miller_rabin(uint64_t to_test, uint64_t k);
-void				ft_free_s_entry(void *to_free, size_t null);
 void				ft_del_entry(t_hlist **alst, void (*del)(void *, size_t));
 t_hlist				*ft_lst_entries(const t_htable *htable);
 

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_htable.c                                   :+:      :+:    :+:   */
+/*   zsh_hash.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/28 16:48:25 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 22:48:11 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/10/21 22:13:18 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/10/21 22:24:54 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "htable.h"
+#ifndef ZSH_HASH_H
+# define ZSH_HASH_H
 
-void			ft_free_htable(t_htable *htable, t_ft_free ft_free)
-{
-	uint64_t	i;
-	t_hlist		**table;
+# include "hash_module.h"
+# include "libft.h"
 
-	i = 0;
-	table = htable->table;
-	while (i < htable->table_size)
-	{
-		if (table[i] != NULL)
-			ft_lstdel((t_list**)&(table[i]), ft_free);
-		i++;
-	}
-	free(htable->table);
-}
+void					ft_hash_path(t_htable *bin_table, char *path);
+void					ft_free_zsh(void *to_free, size_t null);
+void					ft_print_zsh(t_list *to_print);
+
+#endif

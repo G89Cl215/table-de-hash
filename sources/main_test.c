@@ -6,12 +6,13 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/19 15:28:55 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/21 17:21:07 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "hash_module.h"
+#include "bash_hash.h"
 
 int64_t ft_used_cell(t_htable *htable)
 {
@@ -35,35 +36,40 @@ int		main(int ac, char **av, char **env)
 {
 	int			i;
 	t_htable	table;
+	t_bash_hash	new;
+	t_bash_hash	*ent;
 	char		*path;
 
 	i = 0;
 	table = ft_init_htable(2); //on commence avec une petite table pour voir le comportement du redimensionnement de la table... Leaks notamment
 //	printf("{%llu}		   a:b               {%llu}\n", table.ran_a, table.ran_b);
 //	printf("{%llu}		size:\n", table.table_size);
-/*	while ((av[i] && env[i]))
+	while ((av[i] && env[i]))
 	{
-		ft_insert(&table, av[i], env[i], ft_strlen(env[i]) + 1);
-		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
+		new = ft_init_bash_hash(env[i], i);
+		printf("new->bin_path: |%s|", new.bin_path);
+		ft_insert(&table, av[i], &new, sizeof(t_bash_hash));
+		ent = ft_get_entry(&table, av[i]);
+		printf("{%s}   =:=   {%s}\n", env[i], ent->bin_path);
 		
 		i++;
-	}*/
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], "PATH=", 5))
-		{
-			path = strdup(env[i] + 5);
-			break ;
-		}
-		i++;
 	}
+//	while (env[i])
+//	{
+//		if (!ft_strncmp(env[i], "PATH=", 5))
+//		{
+//			path = strdup(env[i] + 5);
+//			break ;
+//		}
+//		i++;
+//	}
 //	printf("{%s}\n", path);
-	ft_hash_path(&table, path);
+//	ft_hash_path(&table, path);
 //	printf("{%llu}		size:spread_factor   {%llu}\n", table.table_size, (ft_used_cell(&table) * 100)/ table.entry_nbr );
-	ft_print_sortentries(&table);
-	ft_free_htable(&table);
-
-	ft_hash_path(NULL, NULL);
+	ft_print_sortentries(&table, &ft_print_bash_hash);
+//	ft_free_htable(&table);
+//
+//	ft_hash_path(NULL, NULL);
 
 	return (0);
 }
