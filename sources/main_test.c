@@ -6,13 +6,13 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 15:40:22 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:14:31 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "hash_module.h"
 #include "htable_type_dispatcher.h"
-#include "bash_hash.h"
 
 int64_t ft_used_cell(t_htable *htable)
 {
@@ -44,9 +44,7 @@ int		main(int ac, char **av, char **env)
 //	printf("{%llu}		size:\n", table.table_size);
 	while ((av[i] && env[i]))
 	{
-	ft_putendl("SEGFAULT !");
 		ft_insert(&table, av[i], env[i]);
-	ft_putendl("NON");
 		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
 		i++;
 		ft_print_sortentries(&table);
@@ -67,6 +65,5 @@ int		main(int ac, char **av, char **env)
 
 //	ft_hash_path(NULL, NULL);
 
-	while (1) ;
 	return (0);
 }

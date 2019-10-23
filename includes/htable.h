@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 15:09:59 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:07:42 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ union				u_rd
 	char			rd[8];
 	uint64_t		nbr;
 };
+
+typedef struct		s_bash_hash
+{
+	char			*bin_path;
+	unsigned int	hit_value;
+}					t_bash_hash;
 
 typedef struct		s_entry
 {
@@ -64,5 +70,11 @@ t_ft_lstcpy			ft_get_lstcpy(int e_table_type);
 t_ft_list			ft_get_lstprint(int e_table_type);
 t_ft_free			ft_get_free(int e_table_type);
 size_t				ft_get_value_size(int e_table_type, void *value);
+t_list				*ft_bash_lstcpy(t_list *elem);
+t_list				*ft_string_lstcpy(t_list *elem);
+void				ft_print_string(t_list *to_print);
+void				ft_print_bash(t_list *to_print);
+void				ft_free_string(void *to_free, size_t null);
+void				ft_free_bash(void *to_free, size_t null);
 
 #endif

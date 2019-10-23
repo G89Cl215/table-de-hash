@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 22:11:12 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/23 14:11:18 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 18:10:27 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ SRCFILE			=	corps_fini_tools.c \
 					ft_iter_htable.c\
 					ft_print_entries.c\
 					init_htable.c\
-					bash_hash.c\
-					zsh_hash.c\
+					ft_hash_path.c\
+					string_routines.c\
+					bash_routines.c\
 					htable_type_dispatcher.c\
 
 SRC_DIR			=	sources

@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/23 16:58:15 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 17:23:04 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,17 +84,21 @@ o> ft_insert : Needs a htable, a key to hash and the value of the entry. The key
 o> ft_get_entry : If key corresponds with an entry of your table, the value of
 	this entry (see ft_insert) is returned.
 
-o> ft_hash_path : On the first call, it will find every executable binary in a
-	path variable (that must be formatted as they are in a shell environment, 
-	i.e. FILE1:FILE2:FILE3) and insert them in the given hash table. It will
-	then statically keep track of the last "hashed" path. If it is recalled the
-	new path is compared with the one in memory. On a difference, it will empty
-	the hash table and re-insert the newly found binaries in the hash table.
-
 o> ft_print_sortentries : Will print each entry on a line the format key=value
 	and sorted in ascii values of keys.
 
 o> ft_free_htable : pretty straight foward.
+
+o> ft_hash_path : This function reproduces the zsh hash builtin way of parsing
+	PATH for binaries' paths. It will thus works with string entries hash
+	tables. On the first call, it will find every executable binary in a path
+	variable (that must be formatted as they are in a shell environment,
+	i.e. FILE1:FILE2:FILE3) and insert them in the given hash table. It will
+	then keep track of the last "hashed" path in  a static variable. If it is
+	recalled the new path is compared with the one in memory. On a difference,
+	it will empty the hash table and re-insert the newly found binaries in the
+	hash table. A call with a NULL path will allow the function to clear the
+	dupped path in the static variable from previous calls.
 
 
 III.ERRORS

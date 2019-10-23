@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 12:11:10 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 15:07:45 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 17:18:02 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,5 @@ typedef struct		s_htable_type
 	t_ft_lstcpy		ft_value_cpy;
 	size_t			value_size;
 }					t_htable_type;
-
-t_list		*ft_bash_lstcpy(t_list *elem);
-t_list		*ft_string_lstcpy(t_list *elem);
 
 #endif

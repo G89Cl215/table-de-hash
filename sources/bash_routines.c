@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bash_hash.c                                        :+:      :+:    :+:   */
+/*   bash_routines.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/21 16:38:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 14:58:39 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/10/23 18:00:54 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/10/23 18:11:18 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "bash_hash.h"
+#include "hash_module.h"
 
-void	ft_free_bash_hash(void *to_free, size_t null)
+void	ft_free_bash(void *to_free, size_t null)
 {
 	t_entry		*entry;
 
@@ -25,18 +25,21 @@ void	ft_free_bash_hash(void *to_free, size_t null)
 	free(entry);
 }
 
-void	ft_insert_bash_hash(t_htable *htable, char *key,
-												char *path, unsigned int hit)
+t_list		*ft_bash_lstcpy(t_list *elem)
 {
-	t_bash_hash		*new;
+	t_hlist		*new;
+	void		*tmp;
 
-	/*ft_check_memory(*/new = ft_memalloc(sizeof(t_bash_hash));
-	new->bin_path = ft_strdup(path);
-	new->hit_value = hit;
-	ft_insert(htable, key, new);
+	new = (t_hlist*)elem;
+	new->content->key = ft_strdup(new->content->key);
+	tmp = ft_memalloc(new->content->value_size);
+	ft_memcpy(tmp, new->content->value, new->content->value_size);
+	((t_bash_hash*)tmp)->bin_path = ft_strdup(((t_bash_hash*)tmp)->bin_path);
+	new->content->value = tmp;
+	return (elem);
 }
 
-void	ft_print_bash_hash(t_list *to_print)
+void	ft_print_bash(t_list *to_print)
 {
 	t_bash_hash		*entry;
 	char			*print_text;
@@ -47,4 +50,14 @@ void	ft_print_bash_hash(t_list *to_print)
 	else// if (entry->hit_value < 1000000)
 		print_text = "%-8u%s\n";
 	ft_printf(print_text, entry->hit_value, entry->bin_path);
+}
+
+void	ft_insert_bash(t_htable *htable, char *key,
+												char *path, unsigned int hit)
+{
+	t_bash_hash		new;
+
+	new.bin_path = ft_strdup(path);
+	new.hit_value = hit;
+	ft_insert(htable, key, &new);
 }

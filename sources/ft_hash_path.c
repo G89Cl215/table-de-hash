@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 16:36:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 15:29:32 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:13:40 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,12 @@
 #include <sys/dir.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "zsh_hash.h"
+#include "hash_module.h"
 
 /*
 ** Cette surcouche du module vise a reproduire le fonctionnnement de la table de
 ** hash du shell zsh.
 */
-
-void					ft_free_zsh(void *to_free, size_t null)
-{
-	t_entry		*entry;
-
-	entry = (t_entry*)to_free;
-	(void)null;
-	free(entry->key);
-	free(entry->value);
-	free(entry);
-}
-
-void					ft_print_zsh(t_list *to_print)
-{
-	t_hlist		*entry;
-
-	entry = (t_hlist*)to_print;
-	ft_printf("%s=%s\n", entry->content->key, entry->content->value);
-}
 
 static char				*ft_build_path(char *path, char *exec)
 {
