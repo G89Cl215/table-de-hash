@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 15:33:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 23:20:45 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:09:59 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_entry
 {
 	char			*key;
 	void			*value;
+	size_t			value_size;
 }					t_entry;
 
 typedef struct		s_hlist
@@ -46,10 +47,12 @@ typedef struct		s_htable
 	uint64_t		big_prime;
 	uint64_t		ran_a;
 	uint64_t		ran_b;
+	int				data_type;
 }					t_htable;
 
 typedef void		(*t_ft_list)(t_list *);
 typedef void		(*t_ft_free)(void *, size_t);
+typedef t_list		*(*t_ft_lstcpy)(t_list *);
 
 uint64_t			ft_hash(const t_htable *htable, const char *to_hash);
 uint64_t			ft_get_prime(uint64_t min);
@@ -57,5 +60,9 @@ uint64_t			ft_get_ran(uint64_t mod);
 int					ft_miller_rabin(uint64_t to_test, uint64_t k);
 void				ft_del_entry(t_hlist **alst, void (*del)(void *, size_t));
 t_hlist				*ft_lst_entries(const t_htable *htable);
+t_ft_lstcpy			ft_get_lstcpy(int e_table_type);
+t_ft_list			ft_get_lstprint(int e_table_type);
+t_ft_free			ft_get_free(int e_table_type);
+size_t				ft_get_value_size(int e_table_type, void *value);
 
 #endif

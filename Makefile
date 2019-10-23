@@ -6,14 +6,14 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 22:11:12 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/21 22:24:19 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 14:11:18 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCFILE			=	corps_fini_tools.c \
 					ft_empty_htable.c\
 					ft_free_htable.c\
-					ft_get_entries.c\
+					ft_lst_entries.c\
 					ft_get_entry.c\
 					ft_hash.c\
 					ft_insert.c\
@@ -22,6 +22,7 @@ SRCFILE			=	corps_fini_tools.c \
 					init_htable.c\
 					bash_hash.c\
 					zsh_hash.c\
+					htable_type_dispatcher.c\
 
 SRC_DIR			=	sources
 
@@ -34,7 +35,7 @@ OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCFILE:.c=.o))
 NAME			=	maths_module.a
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra -g3
 HFLAGS			=	$(addprefix -I ,$(HDR_DIR))
 CFLAGS			+=	$(HFLAGS)
 .PHONY: all re clean fclean ls

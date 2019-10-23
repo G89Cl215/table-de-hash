@@ -6,14 +6,14 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 16:48:25 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 22:48:11 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:28:45 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "htable.h"
 
-void			ft_free_htable(t_htable *htable, t_ft_free ft_free)
+void			ft_free_htable(t_htable *htable)
 {
 	uint64_t	i;
 	t_hlist		**table;
@@ -23,7 +23,7 @@ void			ft_free_htable(t_htable *htable, t_ft_free ft_free)
 	while (i < htable->table_size)
 	{
 		if (table[i] != NULL)
-			ft_lstdel((t_list**)&(table[i]), ft_free);
+			ft_lstdel((t_list**)&(table[i]), ft_get_free(htable->data_type));
 		i++;
 	}
 	free(htable->table);

@@ -6,20 +6,23 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 12:52:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 23:21:27 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:35:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "htable_type_dispatcher.h"
 #include "hash_module.h"
 
-static void			ft_resize_htable(t_htable *htable, t_ft_free ft_free)
+static void			ft_resize_htable(t_htable *htable)
 {
 	t_hlist		*entries;
 	t_hlist		*voyager;
 
+		ft_putendl("PLOP");
 	entries = ft_lst_entries(htable);
-	ft_empty_htable(htable, ft_free);
+		ft_putendl("LST_DONE");
+	ft_empty_htable(htable);
 	htable->table_size *= 2;
 	htable->big_prime = ft_get_prime(3 * htable->table_size);
 	htable->ran_a = ft_get_ran(htable->big_prime);
@@ -30,25 +33,28 @@ static void			ft_resize_htable(t_htable *htable, t_ft_free ft_free)
 	voyager = entries;
 	while (voyager)
 	{
-		ft_insert(htable, voyager->content->key, voyager->content->value, ft_free);
+		ft_insert(htable, voyager->content->key, voyager->content->value);
 		voyager = voyager->next;
 	}
-	ft_lstdel((t_list**)&entries, ft_free);
+	ft_lstdel((t_list**)&entries, ft_get_free(htable->data_type));
 }
 
-void				ft_insert(t_htable *htable, char *key, void *value,
-										t_ft_free ft_free)
+void				ft_insert(t_htable *htable, char *key, void *value)
 {
+	int			data_type;
 	size_t		index;
 	t_entry		content;
 	t_hlist		*new_entry;
 
+	data_type = htable->data_type;
 	/*ft_check_memory(*/content.key = ft_strdup(key);
-	content.value = value;
+	content.value_size = ft_get_value_size(htable->data_type, value);
+	content.value = ft_memalloc(content.value_size);
+	ft_memcpy(content.value, value, content.value_size);
 	/*ft_check_memory(*/new_entry = (t_hlist*)ft_lstnew(&content, sizeof(content));
 	index = ft_hash(htable, key);
 	ft_lstadd((t_list**)&(htable->table[index]), (t_list*)new_entry);
 	(htable->entry_nbr)++;
 	if (htable->entry_nbr * 100 / htable->table_size > 70)
-		ft_resize_htable(htable, ft_free);
+		ft_resize_htable(htable);
 }

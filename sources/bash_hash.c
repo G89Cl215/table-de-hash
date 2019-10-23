@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 16:38:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 23:23:02 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 14:58:39 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_insert_bash_hash(t_htable *htable, char *key,
 	/*ft_check_memory(*/new = ft_memalloc(sizeof(t_bash_hash));
 	new->bin_path = ft_strdup(path);
 	new->hit_value = hit;
-	ft_insert(htable, key, new, &ft_free_bash_hash);
+	ft_insert(htable, key, new);
 }
 
 void	ft_print_bash_hash(t_list *to_print)

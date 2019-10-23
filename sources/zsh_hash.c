@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 16:36:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/21 23:27:15 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:29:32 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static void				ft_push_exec(t_htable *bin_table, char *dir_name)
 		{
 			exec_path = ft_build_path(dir_name, file_data->d_name);
 			if (stat(exec_path, &sb) >= 0 && sb.st_mode & S_IXUSR)
-				ft_insert(bin_table, file_data->d_name, ft_strdup(exec_path),
-																&ft_free_zsh);
+				ft_insert(bin_table, file_data->d_name, ft_strdup(exec_path));
 			free(exec_path);
 		}
 	}
@@ -96,7 +95,7 @@ void					ft_hash_path(t_htable *bin_table, char *path)
 	if (hashed && !(ft_strcmp(path, hashed)))
 		return ;
 	i = 0;
-	ft_empty_htable(bin_table, &ft_free_zsh);
+	ft_empty_htable(bin_table);
 	/*ft_check_memory(*/dir = ft_strsplit(path, ":");
 	while ((dir[i]))
 		ft_push_exec(bin_table, dir[i++]);

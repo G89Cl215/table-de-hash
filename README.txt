@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/19 15:37:06 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 16:58:15 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,26 +40,48 @@ ft_free_htable lest you want memory leaks!
 
 II.FURTHER EXPLANATION
 
-o> ft_init_htable : entry_nbr is a rough estimate of number of entries you think
-	your table will have. It is not critical to nail this number as the module
-	keeps track of the load factor and resizes the hash table it gets too
-	cluttered ; although it is good to get it right since any operation mapping
-	hash tables aren't the most efficient. If you have no idea, you could always
-	use DEF_SIZE macro. A hash table for binaries such as those used in shells
-	to avoid many system calls when looking for known executables may use
-	AVG_BIN_NBR as entry_nbr.
+o> ft_init_htable : Sets up the "memory hog" and stores a set of functions that
+	treats the data structure of the entries the user wishes.
+	o> entry_nbr: is a rough estimate of number of entries you think your table
+		will have. It is not critical to nail this number as the module
+		keeps track of the load factor and resizes the hash table it gets too 
+		cluttered ; although it is good to get it right since any operation
+		mapping hash tables aren't the most efficient. If you have no idea, you
+		could always use DEF_SIZE macro. A hash table for binaries such as those
+		used in shells to avoid many system calls when looking for known
+		executables may use AVG_BIN_NBR as entry_nbr.
+	o> data_type : is an int that will allow the module to load the routines
+		that treat your data structures. It needs to be a value of the
+		e_htable_type that is described in htable_type_dispatcher.h !!!
 
-o> ft_insert : needs a htable, a key to hash and the value of the entry. The key
+o> htable_type_dispatcher.c : Data structures need routines throughout this
+	module, such as the way to copy the data or the way to print it. For any use
+	of a value structure that isn't native to this module, the user must write
+	a set of functions and put their addresses in a line of the dispatcher. It
+	also needs the size of the structure it must treat, which is the last field
+	of a dispatcher line. The index in the dispatcher of the line you add and/or
+	want to use must also be the data_type argument of ft_init_htable. We
+	recommand you use the enum defined in the header matching this file.
+	Are native to this module :
+		o> A string entry where value is a string.
+		o> A bash-like data structure that reproduce bash's hash table ways.
+		(binary path and number of hits).
+
+o> ft_insert : Needs a htable, a key to hash and the value of the entry. The key
 	is always treated as a string, whereas value is (void*) type so that users
-	may insert whatever struct one wishes. The size of subsequent struct is
-	the last parameter of the function.
-	The simplest data one could insert is a string. The size_value should then
-	be the number of char of the string i.e. its length + 1 (for the final '\0')
+	may insert whatever struct one wishes. However, giving a hash table a
+	structure that isn't native to this module requires user to write routines
+	to handle the data type. If you give the module a structure, you need to
+	care that you have allocated the elements within the structure (i.e. if you
+	want to feed your hash table a structure that contains a string, you needn't
+	copy the structure in itself, as it is copied by the module ; but you do
+	need to duplicate the string within the structure you send to ft_insert
+	(i.e. the value field)). The simplest data one could insert is a string.
 	The key is fed to the cryptographic function to determine the index of the
 	entry. value is the data of the entry. A use could be, for example
-	key = "grep", value = "/usr/bin/grep".
+	key = "grep", value = "/usr/bin/grep" (here, string entries are used).
 
-o> ft_get_entry : if key corresponds with an entry of your table, the value of
+o> ft_get_entry : If key corresponds with an entry of your table, the value of
 	this entry (see ft_insert) is returned.
 
 o> ft_hash_path : On the first call, it will find every executable binary in a
