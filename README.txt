@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/23 17:23:04 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 18:20:56 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,13 @@ TO WHOM MIGHT WONDER: Hash tables are data structures that allow users to look
 	takes no chance though, and avoids collision by chaining data with the same.
 	The main inconvenient of hash tables is the gigantic memory hog.
 
-It is fully independant and can be called in the shell by invocking functions of
-hash_module.h header.
+It is fully independant and can be called in a program by invocking functions of
+hash_module.h header. It was concieved first and foremost to implement binary
+hash builtin of shells. This influence may be percieved throughout the module.
 
-USER BE WARNED, this module DOES NOT keep track of the memory it
-allocated ; Any table init'd by ft_init_htable must be free'd with
-ft_free_htable lest you want memory leaks!
+USER BE WARNED: This module DOES NOT keep track of the memory it allocated !!!
+Any table init'd by ft_init_htable must be free'd with ft_free_htable lest you
+want memory leaks!
 
 
 II.FURTHER EXPLANATION
