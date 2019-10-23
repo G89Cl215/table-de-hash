@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/23 18:20:56 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/23 18:49:30 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,16 +71,16 @@ o> htable_type_dispatcher.c : Data structures need routines throughout this
 o> ft_insert : Needs a htable, a key to hash and the value of the entry. The key
 	is always treated as a string, whereas value is (void*) type so that users
 	may insert whatever struct one wishes. However, giving a hash table a
-	structure that isn't native to this module requires user to write routines
-	to handle the data type. If you give the module a structure, you need to
-	care that you have allocated the elements within the structure (i.e. if you
-	want to feed your hash table a structure that contains a string, you needn't
-	copy the structure in itself, as it is copied by the module ; but you do
-	need to duplicate the string within the structure you send to ft_insert
-	(i.e. the value field)). The simplest data one could insert is a string.
-	The key is fed to the cryptographic function to determine the index of the
-	entry. value is the data of the entry. A use could be, for example
-	key = "grep", value = "/usr/bin/grep" (here, string entries are used).
+	structure that isn't native to this module requires the user to write a set
+	of routines to handle the data type.
+	When you give the module an entry, it will allocate the elements within the
+	structure according to the copy routine you wrote.
+	The simplest data one could insert is a string.
+	o> key : will be fed to the cryptographic function to determine the index 
+		of the entry.
+	o> value : is the data of the entry.
+		A use could be, for example key = "grep", value = "/usr/bin/grep" (here,
+		string entries are used).
 
 o> ft_get_entry : If key corresponds with an entry of your table, the value of
 	this entry (see ft_insert) is returned.

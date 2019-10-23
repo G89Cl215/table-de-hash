@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 13:21:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 18:14:31 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:44:54 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ int		main(int ac, char **av, char **env)
 {
 	int			i;
 	t_htable	table;
+	t_bash_hash	*ent;
 	char		*path;
 
 	i = 0;
-	table = ft_init_htable(2, e_string_entries); //on commence avec une petite table pour voir le comportement du redimensionnement de la table... Leaks notamment
+	table = ft_init_htable(2, e_bash_entries); //on commence avec une petite table pour voir le comportement du redimensionnement de la table... Leaks notamment
 //	printf("{%llu}		   a:b               {%llu}\n", table.ran_a, table.ran_b);
 //	printf("{%llu}		size:\n", table.table_size);
 	while ((av[i] && env[i]))
 	{
-		ft_insert(&table, av[i], env[i]);
-		printf("{%s}   =:=   {%s}\n", env[i], ft_get_entry(&table, av[i]));
+		ft_insert_bash(&table, av[i], env[i], HIT);
+		ent =  ft_get_entry(&table, av[i]);
+		printf("{%s}   =:=   {%s}\n", env[i], ent->bin_path);
 		i++;
 		ft_print_sortentries(&table);
 	}
@@ -65,5 +67,6 @@ int		main(int ac, char **av, char **env)
 
 //	ft_hash_path(NULL, NULL);
 
+//	while (1) ;
 	return (0);
 }

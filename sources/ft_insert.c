@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 12:52:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/10/23 15:35:35 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:42:22 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,20 @@ static void			ft_resize_htable(t_htable *htable)
 
 void				ft_insert(t_htable *htable, char *key, void *value)
 {
-	int			data_type;
-	size_t		index;
-	t_entry		content;
-	t_hlist		*new_entry;
+	int				data_type;
+	size_t			index;
+	t_entry			content;
+	t_hlist			*new_entry;
+	t_ft_lstcpy		ft_cpy;
 
 	data_type = htable->data_type;
-	/*ft_check_memory(*/content.key = ft_strdup(key);
+	/*ft_check_memory(*/content.key = key;
 	content.value_size = ft_get_value_size(htable->data_type, value);
-	content.value = ft_memalloc(content.value_size);
+	content.value = value;
 	ft_memcpy(content.value, value, content.value_size);
 	/*ft_check_memory(*/new_entry = (t_hlist*)ft_lstnew(&content, sizeof(content));
+	ft_cpy = ft_get_lstcpy(data_type);
+	ft_cpy((t_list*)new_entry);
 	index = ft_hash(htable, key);
 	ft_lstadd((t_list**)&(htable->table[index]), (t_list*)new_entry);
 	(htable->entry_nbr)++;
