@@ -6,7 +6,7 @@
 #    By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 15:59:37 by tgouedar          #+#    #+#              #
-#    Updated: 2019/10/30 14:48:32 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/10/30 14:55:22 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,10 @@ native to this module, the user must write a set of functions and put their
 addresses in a line of the dispatcher in htable_type_dispatcher.c. It also needs
 the size of the structure it must treat, which is the last field of a dispatcher
 line.
+
+Users may find an example of what functions you need to write in the
+string_routines.c and bash_routines.c files, as theyall the functions needed to
+distinguish between the to native behaviours this module offers.
 
 /!\ Setting behaviour is done at initialisation /!\
 The index in the dispatcher of the line you add and/or want to use must also be
